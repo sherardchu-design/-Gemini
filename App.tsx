@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Login } from './components/Login';
 import { ChatInterface } from './components/ChatInterface';
 import { BackgroundParticles } from './components/BackgroundParticles';
+import { Heart } from 'lucide-react';
 
 const PASSWORD_KEY = 'peiyi2026';
 const SESSION_KEY = 'peiyi_auth_session';
@@ -16,7 +17,8 @@ const App: React.FC = () => {
     if (storedAuth === 'true') {
       setIsAuthenticated(true);
     }
-    setIsLoading(false);
+    // Artificial delay for cuteness
+    setTimeout(() => setIsLoading(false), 800);
   }, []);
 
   const handleLogin = (password: string) => {
@@ -34,13 +36,16 @@ const App: React.FC = () => {
   };
 
   if (isLoading) {
-    return <div className="h-screen w-screen bg-cinema-black flex items-center justify-center text-cinema-accent animate-pulse font-movie text-2xl">
-      Loading...
-    </div>;
+    return (
+      <div className="h-screen w-screen bg-maiden-pink flex flex-col items-center justify-center text-maiden-text">
+        <Heart className="w-12 h-12 text-maiden-dark-pink animate-bounce mb-4" fill="currentColor" />
+        <div className="font-cute text-xl animate-pulse">正在准备惊喜...</div>
+      </div>
+    );
   }
 
   return (
-    <div className="relative h-screen w-screen overflow-hidden flex flex-col font-sans text-cinema-white bg-cinema-black">
+    <div className="relative h-screen w-screen overflow-hidden flex flex-col font-sans text-maiden-text bg-gradient-to-br from-blue-50 via-pink-50 to-white selection:bg-pink-200">
       {/* Background decorations */}
       <BackgroundParticles />
 

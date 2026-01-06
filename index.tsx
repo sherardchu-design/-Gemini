@@ -1,4 +1,4 @@
-import React, { Component, ErrorInfo, ReactNode } from 'react';
+import React, { ErrorInfo, ReactNode } from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 
@@ -12,7 +12,7 @@ interface ErrorBoundaryState {
 }
 
 // Simple Error Boundary Component
-class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
+class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
   public state: ErrorBoundaryState = {
     hasError: false,
     error: null
@@ -32,28 +32,29 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
         <div style={{
             height: '100vh',
             width: '100vw',
-            backgroundColor: '#1a1a1a',
-            color: '#ff6b81',
+            backgroundColor: '#fff0f5', // Lavender Blush
+            color: '#db7093', // Pale Violet Red
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            fontFamily: '"Courier New", monospace',
+            fontFamily: '"Quicksand", "Noto Sans SC", sans-serif',
             textAlign: 'center',
             padding: '2rem'
         }}>
-          <h1 style={{fontSize: '3rem', marginBottom: '1rem'}}>NG</h1>
-          <h2 style={{fontSize: '1.5rem', marginBottom: '2rem', color: '#f5f5f5'}}>Scene Failed to Render</h2>
+          <h1 style={{fontSize: '3rem', marginBottom: '0.5rem'}}>qaq</h1>
+          <h2 style={{fontSize: '1.5rem', marginBottom: '2rem', color: '#ffb7b2'}}>画面加载失败啦</h2>
           <div style={{
-              backgroundColor: '#2d2d2d',
+              backgroundColor: 'white',
               padding: '1.5rem',
-              borderRadius: '0.5rem',
+              borderRadius: '1rem',
               maxWidth: '800px',
               textAlign: 'left',
-              border: '1px solid #ff6b81'
+              border: '2px dashed #ffb7b2',
+              boxShadow: '0 4px 6px rgba(255, 182, 193, 0.3)'
           }}>
-            <p style={{marginBottom: '0.5rem', fontWeight: 'bold'}}>Error Details:</p>
-            <pre style={{whiteSpace: 'pre-wrap', fontSize: '0.9rem', color: '#ccc'}}>
+            <p style={{marginBottom: '0.5rem', fontWeight: 'bold'}}>错误小纸条:</p>
+            <pre style={{whiteSpace: 'pre-wrap', fontSize: '0.9rem', color: '#888'}}>
                 {this.state.error?.toString()}
             </pre>
           </div>
@@ -61,16 +62,17 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
             onClick={() => window.location.reload()}
             style={{
                 marginTop: '2rem',
-                padding: '1rem 2rem',
-                backgroundColor: '#f5f5f5',
-                color: '#1a1a1a',
+                padding: '0.8rem 2rem',
+                backgroundColor: '#ffb7b2',
+                color: 'white',
                 border: 'none',
+                borderRadius: '2rem',
                 cursor: 'pointer',
                 fontWeight: 'bold',
-                textTransform: 'uppercase'
+                boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
             }}
           >
-            Retake Scene (Reload)
+            重新尝试 ✨
           </button>
         </div>
       );
@@ -97,6 +99,5 @@ try {
   );
 } catch (e) {
   console.error("Root Render Failed", e);
-  // Throwing here ensures the global window.onerror catches it if React completely fails
   throw e; 
 }
